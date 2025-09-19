@@ -10,10 +10,18 @@ TARGET_SUPPORTS_OMX_SERVICE := false
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Inherit from avicii device
-$(call inherit-product, device/oneplus/avicii/device.mk)
+DEVICE_CODENAME := avicii
+DEVICE_PATH := device/oneplus/avicii
+VENDOR_PATH := vendor/oneplus/avicii
+$(call inherit-product, $(DEVICE_PATH)/device.mk)
 
-# Inherit some common Infinity-X stuff.
-$(call inherit-product, vendor/infinity/config/common_full_phone.mk)
+# Inherit some common stuff
+ROM_VENDOR := lineage
+ifdef ROM_VENDOR
+$(call inherit-product, vendor/$(ROM_VENDOR)/config/common_full_phone.mk)
+else
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+endif
 
 # Infinity-X Specific Flags
 INFINITY_MAINTAINER := sreeshankark
@@ -27,12 +35,18 @@ TARGET_EXCLUDES_AUDIOFX := true
 TARGET_EXCLUDES_VIA := true
 endif
 
-PRODUCT_NAME := infinity_avicii
-PRODUCT_DEVICE := avicii
+# Inherit device configuration
+ifdef ROM_VENDOR
+PRODUCT_NAME := $(ROM_VENDOR)_$(DEVICE_CODENAME)
+else
+PRODUCT_NAME := lineage_$(DEVICE_CODENAME)
+endif
+PRODUCT_DEVICE := $(DEVICE_CODENAME)
 PRODUCT_MANUFACTURER := OnePlus
 PRODUCT_BRAND := OnePlus
 PRODUCT_MODEL := AC2003
 
+# Build props
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
