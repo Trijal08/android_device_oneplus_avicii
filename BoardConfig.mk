@@ -97,6 +97,8 @@ BOARD_RAMDISK_USE_LZ4 := true
 TARGET_KERNEL_ADDITIONAL_FLAGS := BRAND_SHOW_FLAG=oneplus
 TARGET_KERNEL_SOURCE := kernel/oneplus/avicii
 TARGET_KERNEL_CONFIG := avicii_defconfig debugfs.config
+# KernelSU-Next and SuSFS config
+TARGET_KERNEL_CONFIG += ksun_sus.config
 
 # Kernel Clang Flags
 KERNEL_CC := CC=clang
