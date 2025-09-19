@@ -23,18 +23,6 @@ else
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 endif
 
-# Infinity-X Specific Flags
-INFINITY_MAINTAINER := sreeshankark
-INFINITY_BUILD_TYPE := OFFICIAL
-TARGET_HAS_UDFPS := true
-TARGET_SUPPORTS_QUICK_TAP := true
-TARGET_BOOT_ANIMATION_RES := 1080
-ifeq ($(WITH_GAPPS), true)
-TARGET_BUILD_GOOGLE_TELEPHONY := true
-TARGET_EXCLUDES_AUDIOFX := true
-TARGET_EXCLUDES_VIA := true
-endif
-
 # Inherit device configuration
 ifdef ROM_VENDOR
 PRODUCT_NAME := $(ROM_VENDOR)_$(DEVICE_CODENAME)
@@ -45,6 +33,43 @@ PRODUCT_DEVICE := $(DEVICE_CODENAME)
 PRODUCT_MANUFACTURER := OnePlus
 PRODUCT_BRAND := OnePlus
 PRODUCT_MODEL := AC2003
+
+# UDFPS support
+TARGET_HAS_UDFPS := true
+EXTRA_UDFPS_ANIMATIONS := true
+
+# Blur
+TARGET_ENABLE_BLUR := true
+
+# Lawnchair (Pixel Launcher by default)
+TARGET_INCLUDE_PIXEL_LAUNCHER := true
+TARGET_DEFAULT_PIXEL_LAUNCHER := true
+TARGET_PREBUILT_LAWNCHAIR_LAUNCHER := true
+
+# Custom package installer
+TARGET_USE_CUSTOM_PACKAGE_INSTALLER := true
+
+# Live wallpapers
+TARGET_INCLUDE_LIVE_WALLPAPERS := true
+
+# Quick tap
+TARGET_SUPPORTS_QUICK_TAP  := true
+
+# Now Playing
+TARGET_SUPPORTS_NOW_PLAYING := true
+
+# Clear Calling
+TARGET_SUPPORTS_CLEAR_CALLING := true
+
+# Call Recording Support
+TARGET_SUPPORTS_CALL_RECORDING := true
+
+# GMS
+WITH_GMS := true
+
+# Mist OS Flags
+MIST_BUILD_TYPE := UNOFFICIAL
+MISTOS_MAINTAINER := GamerBoy1234294
 
 # Build props
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
